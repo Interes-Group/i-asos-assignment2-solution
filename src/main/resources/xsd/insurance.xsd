@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="xs3p.xsl"?>
+<xs:schema elementFormDefault="qualified"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           targetNamespace="insurances"
+           xmlns:tns="insurances"
+           xmlns:ans="address"
+           version="1.1.0">
+
+    <xs:import namespace="address" schemaLocation="address.xsd"/>
+
+    <xs:element name="insurances">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="insurance" type="tns:insurance_type" minOccurs="0" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="insurance" type="tns:insurance_type"/>
+
+    <xs:complexType name="insurance_type">
+        <xs:choice minOccurs="1" maxOccurs="1">
+            <xs:element name="travel_insurance" type="tns:travel_insurance"/>
+            <xs:element name="injury_insurance" type="tns:injury_insurance"/>
+            <xs:element name="household_insurance" type="tns:household_insurance"/>
+            <xs:element name="house_insurance" type="tns:house_insurance"/>
+        </xs:choice>
+    </xs:complexType>
+
+    <xs:complexType name="insurance_base">
+        <xs:sequence>
+            <xs:element name="id" type="xs:long"/>
+            <xs:element name="creation_date" type="xs:date"/>
+            <xs:element name="insurer_id" type="xs:long"/>
+            <xs:element name="start_date" type="xs:date"/>
+            <xs:element name="end_date" type="xs:date"/>
+            <xs:element name="insurance_amount" type="tns:positive_amount"/>
+            <xs:element name="monthly_payment" type="tns:positive_amount"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="life_insurance">
+        <xs:complexContent>
+            <xs:extension base="tns:insurance_base">
+                <xs:sequence>
+                    <xs:element name="insured_id" type="xs:long"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="travel_insurance">
+        <xs:complexContent>
+            <xs:extension base="tns:life_insurance">
+                <xs:sequence>
+                    <xs:element name="validity" type="tns:territory"/>
+                    <xs:element name="purpose" type="xs:string"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="injury_insurance">
+        <xs:complexContent>
+            <xs:extension base="tns:life_insurance">
+                <xs:sequence>
+                    <xs:element name="permanent_injury_value" type="xs:float"/>
+                    <xs:element name="death_value" type="xs:float"/>
+                    <xs:element name="daily_payment" type="xs:float"/>
+                    <xs:element name="territory" type="tns:territory"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:complexType name="non_life_insurance">
+        <xs:complexContent>
+            <xs:extension base="tns:insurance_base">
+                <xs:sequence>
+                    <xs:element name="property_type" type="tns:property_type"/>
+                    <xs:element name="property_address" type="ans:address"/>
+                    <xs:element name="property_value" type="xs:double"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="household_insurance">
+        <xs:complexContent>
+            <xs:extension base="tns:non_life_insurance">
+                <xs:sequence>
+                    <xs:element name="household_value" type="xs:float"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="house_insurance">
+        <xs:complexContent>
+            <xs:extension base="tns:non_life_insurance">
+                <xs:sequence>
+                    <xs:element name="garage" type="xs:boolean"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:simpleType name="positive_amount">
+        <xs:restriction base="xs:float">
+            <xs:minInclusive value="0"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="territory">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="SK"/>
+            <xs:enumeration value="EU"/>
+            <xs:enumeration value="WORLD"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="property_type">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="HOUSE"/>
+            <xs:enumeration value="FLAT"/>
+            <xs:enumeration value="COTTAGE"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+</xs:schema>

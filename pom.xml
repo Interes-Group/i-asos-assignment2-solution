@@ -82,7 +82,10 @@
                     <wsdlDirectory>src/main/resources/wsdl/</wsdlDirectory>
                     <packageName>sk.stuba.fei.uim.asos.assignment2.ws</packageName>
                     <keep>true</keep>
+                    <verbose>true</verbose>
+                    <extension>true</extension>
                     <sourceDestDir>${project.build.directory}/generated-sources/main/java</sourceDestDir>
+                    <bindingDirectory>src/main/resources/jaxb</bindingDirectory>
                 </configuration>
                 <executions>
                     <execution>
@@ -97,6 +100,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.1</version>
                 <configuration>
                     <source>8</source>
                     <target>8</target>

@@ -1,23 +1,20 @@
 package sk.stuba.fei.uim.asos.assignment2.user.service;
 
-import sk.stuba.fei.uim.asos.assignment2.user.domain.AbstractUser;
+import sk.stuba.fei.uim.asos.assignment2.ws.User;
 
 import java.util.List;
 
 /**
  * Interface pre Spring service spravujúcu používateľov
- *
- * @param <T> Trieda používateľa
- * @param <I> Trieda identifikátora používateľa
  */
-public interface IUserService<T extends AbstractUser, I> {
+public interface IUserService {
 
-    T add(T user);
+    User add(User user);
 
-    T update(T user);
+    User update(User user);
 
-    List<T> getAll();
+    List<User> getAll();
 
-    T getOne(I id);
+    User getOne(Long id);
 
 }

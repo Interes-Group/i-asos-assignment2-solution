@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions name="UsersWSDL"
+             targetNamespace="users"
+             xmlns="http://schemas.xmlsoap.org/wsdl/"
+             xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+             xmlns:ns="users"
+             xmlns:uns="users"
+             xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+    <documentation>
+        Service: UserService
+        Version: 1.0.0
+        Owner: FEI STUBA I-ASOS
+    </documentation>
+
+    <types>
+        <xsd:schema targetNamespace="usersns">
+            <xsd:import namespace="users" schemaLocation="../xsd/user.xsd"/>
+        </xsd:schema>
+    </types>
+
+    <!--    GET ALL USERS-->
+    <message name="userListRequest"/>
+    <message name="userListResponse">
+        <part name="userList" element="uns:users"/>
+    </message>
+    <!--    GET ONE USER-->
+    <message name="userIdRequest">
+        <part name="userId" element="uns:user_id"/>
+    </message>
+    <message name="userResponse">
+        <part name="user" element="uns:user"/>
+    </message>
+    <!--    ADD USER-->
+    <message name="userAddRequest">
+        <part name="user" element="uns:user"/>
+    </message>
+    <message name="userAddResponse">
+        <part name="user" element="uns:user"/>
+    </message>
+    <!--    UPDATE USER-->
+    <message name="userUpdateRequest">
+        <part name="user" element="uns:user"/>
+    </message>
+    <message name="userUpdateResponse">
+        <part name="user" element="uns:user"/>
+    </message>
+
+    <portType name="UserServicePortType">
+        <documentation>User service for CRUD operations</documentation>
+        <operation name="getAll">
+            <input message="ns:userListRequest"/>
+            <output message="ns:userListResponse"/>
+        </operation>
+        <operation name="getOne">
+            <input message="ns:userIdRequest"/>
+            <output message="ns:userResponse"/>
+        </operation>
+        <operation name="add">
+            <input message="ns:userAddRequest"/>
+            <output message="ns:userAddResponse"/>
+        </operation>
+        <operation name="update">
+            <input message="ns:userUpdateRequest"/>
+            <output message="ns:userUpdateResponse"/>
+        </operation>
+    </portType>
+
+    <binding name="UserServicePortBinding" type="ns:UserServicePortType">
+        <soap:binding style="document" transport="http://schema.xmlsoap.org/soap/http"/>
+        <operation name="getAll">
+            <soap:operation soapAction="http://localhost:8080/user/all"/>
+            <input>
+                <soap:body use="literal"/>
+            </input>
+            <output>
+                <soap:body use="literal"/>
+            </output>
+        </operation>
+        <operation name="getOne">
+            <soap:operation soapAction="http://localhost:8080/user/one"/>
+            <input>
+                <soap:body use="literal"/>
+            </input>
+            <output>
+                <soap:body use="literal"/>
+            </output>
+        </operation>
+        <operation name="add">
+            <soap:operation soapAction="http://localhost:8080/user/add"/>
+            <input>
+                <soap:body use="literal"/>
+            </input>
+            <output>
+                <soap:body use="literal"/>
+            </output>
+        </operation>
+        <operation name="update">
+            <soap:operation soapAction="http://localhost:8080/user/update"/>
+            <input>
+                <soap:body use="literal"/>
+            </input>
+            <output>
+                <soap:body use="literal"/>
+            </output>
+        </operation>
+    </binding>
+
+    <service name="UserService">
+        <port name="UserServicePort" binding="ns:UserServicePortBinding">
+            <soap:address location="http://localhost:8080/user"/>
+        </port>
+    </service>
+
+</definitions>

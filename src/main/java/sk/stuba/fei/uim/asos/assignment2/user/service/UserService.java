@@ -1,6 +1,6 @@
 package sk.stuba.fei.uim.asos.assignment2.user.service;
 
-import sk.stuba.fei.uim.asos.assignment2.user.domain.User;
+import sk.stuba.fei.uim.asos.assignment2.ws.User;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicLong;
 
-public class UserService implements IUserService<User, Long> {
+public class UserService implements IUserService {
 
     private final AtomicLong idCounter;
     private final Map<Long, User> users;

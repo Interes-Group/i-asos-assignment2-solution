@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="xs3p.xsl"?>
+<xs:schema elementFormDefault="qualified"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           targetNamespace="users"
+           xmlns:tns="users"
+           xmlns:ans="address"
+           version="1.1.0">
+
+    <xs:import namespace="address" schemaLocation="address.xsd"/>
+
+    <xs:element name="users">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="user" type="tns:user" minOccurs="0" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="user" type="tns:user"/>
+
+    <xs:element name="user_id" type="xs:long"/>
+
+    <xs:complexType name="user">
+        <xs:sequence>
+            <xs:element name="id" type="xs:long" minOccurs="1" maxOccurs="1"/>
+            <xs:element name="surname" type="xs:string" minOccurs="1"/>
+            <xs:element name="lastname" type="xs:string" minOccurs="1"/>
+            <xs:element name="identificationNumber" type="tns:idNumber" minOccurs="1"/>
+            <xs:element name="email" type="tns:email" minOccurs="1"/>
+            <xs:element name="permanentAddress" type="ans:address" minOccurs="1"/>
+            <xs:element name="correspondenceAddress" type="ans:address" minOccurs="0"/>
+            <xs:element name="contracts" type="tns:contractIds" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:simpleType name="idNumber">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="[0-9]{6}\/?[0-9]{4}"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="email">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="[^@]+@[^\.]+\..+"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:complexType name="contractIds">
+        <xs:sequence>
+            <xs:element name="contractId" type="xs:long" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+
+</xs:schema>
