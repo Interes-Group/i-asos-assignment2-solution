@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions
+        xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+        xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+        xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/"
+        xmlns:impl="insurance-service"
+        xmlns:uns="users"
+        xmlns:ins="insurances"
+        targetNamespace="insurance-service">
+    <wsdl:documentation>
+        Service: InsuranceService
+        Version: 1.0.0
+        Owner: FEI STUBA I-ASOS
+    </wsdl:documentation>
+
+    <wsdl:types>
+        <xsd:schema xmlns="http://www.w3.org/2001/XMLSchema">
+            <xsd:import namespace="users" schemaLocation="../xsd/user.xsd"/>
+        </xsd:schema>
+        <xsd:schema xmlns="http://www.w3.org/2001/XMLSchema">
+            <xsd:import namespace="insurances" schemaLocation="../xsd/insurance.xsd"/>
+        </xsd:schema>
+    </wsdl:types>
+
+    <!--    ADD INSURANCE-->
+    <wsdl:message name="addInsuranceRequest">
+        <wsdl:part name="parameter" element="ins:insurance"/>
+    </wsdl:message>
+    <wsdl:message name="addInsuranceResponse">
+        <wsdl:part name="body" element="ins:insurance"/>
+    </wsdl:message>
+    <!--    GET ALL-->
+    <wsdl:message name="getAllInsurancesRequest"/>
+    <wsdl:message name="getAllInsurancesResponse">
+        <wsdl:part name="body" element="ins:insurances"/>
+    </wsdl:message>
+    <!--    GET insurances BY USER-->
+    <wsdl:message name="getInsurancesByUserRequest">
+        <wsdl:part name="parameter" element="uns:user_id"/>
+    </wsdl:message>
+    <wsdl:message name="getInsurancesByUserResponse">
+        <wsdl:part name="body" element="ins:insurances"/>
+    </wsdl:message>
+
+    <wsdl:portType name="InsuranceServicePortType">
+        <wsdl:documentation>Insurance service for CRUD operations</wsdl:documentation>
+        <wsdl:operation name="add">
+            <wsdl:input message="impl:addInsuranceRequest" name="addInsuranceRequest"/>
+            <wsdl:output message="impl:addInsuranceResponse" name="addInsuranceResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="all">
+            <wsdl:input message="impl:getAllInsurancesRequest" name="getAllInsurancesRequest"/>
+            <wsdl:output message="impl:getAllInsurancesResponse" name="getAllInsurancesResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="byUser">
+            <wsdl:input message="impl:getInsurancesByUserRequest" name="getInsurancesByUserRequest"/>
+            <wsdl:output message="impl:getInsurancesByUserResponse" name="getInsurancesByUserResponse"/>
+        </wsdl:operation>
+    </wsdl:portType>
+
+    <wsdl:binding name="InsuranceServiceSoapBinding" type="impl:InsuranceServicePortType">
+        <wsdlsoap:binding transport="http://schema.xmlsoap.org/soap/http" style="document" />
+        <wsdl:operation name="add">
+            <wsdlsoap:operation soapAction=""/>
+            <wsdl:input name="addInsuranceRequest">
+                <wsdlsoap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="addInsuranceResponse">
+                <wsdlsoap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="all">
+            <wsdlsoap:operation soapAction=""/>
+            <wsdl:input name="getAllInsurancesRequest">
+                <wsdlsoap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="getAllInsurancesResponse">
+                <wsdlsoap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="byUser">
+            <wsdlsoap:operation soapAction=""/>
+            <wsdl:input name="getInsurancesByUserRequest">
+                <wsdlsoap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="getInsurancesByUserResponse">
+                <wsdlsoap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+
+    <wsdl:service name="InsuranceService">
+        <wsdl:port name="InsuranceService" binding="impl:InsuranceServiceSoapBinding">
+            <wsdlsoap:address location="http://localhost:8080/insurance"/>
+        </wsdl:port>
+    </wsdl:service>
+
+</wsdl:definitions>

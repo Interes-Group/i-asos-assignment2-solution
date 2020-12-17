@@ -20,7 +20,7 @@
     <xs:element name="insurance" type="tns:insurance_type"/>
 
     <xs:complexType name="insurance_type">
-        <xs:choice minOccurs="1" maxOccurs="1">
+        <xs:choice>
             <xs:element name="travel_insurance" type="tns:travel_insurance"/>
             <xs:element name="injury_insurance" type="tns:injury_insurance"/>
             <xs:element name="household_insurance" type="tns:household_insurance"/>
@@ -28,9 +28,9 @@
         </xs:choice>
     </xs:complexType>
 
-    <xs:complexType name="insurance_base">
+    <xs:complexType name="abstract_insurance" abstract="true">
         <xs:sequence>
-            <xs:element name="id" type="xs:long"/>
+            <xs:element name="id" type="xs:long" minOccurs="0" maxOccurs="1"/>
             <xs:element name="creation_date" type="xs:date"/>
             <xs:element name="insurer_id" type="xs:long"/>
             <xs:element name="start_date" type="xs:date"/>
@@ -40,9 +40,9 @@
         </xs:sequence>
     </xs:complexType>
 
-    <xs:complexType name="life_insurance">
+    <xs:complexType name="life_insurance" abstract="true">
         <xs:complexContent>
-            <xs:extension base="tns:insurance_base">
+            <xs:extension base="tns:abstract_insurance">
                 <xs:sequence>
                     <xs:element name="insured_id" type="xs:long"/>
                 </xs:sequence>
@@ -72,9 +72,9 @@
         </xs:complexContent>
     </xs:complexType>
 
-    <xs:complexType name="non_life_insurance">
+    <xs:complexType name="non_life_insurance" abstract="true">
         <xs:complexContent>
-            <xs:extension base="tns:insurance_base">
+            <xs:extension base="tns:abstract_insurance">
                 <xs:sequence>
                     <xs:element name="property_type" type="tns:property_type"/>
                     <xs:element name="property_address" type="ans:address"/>
@@ -96,7 +96,7 @@
         <xs:complexContent>
             <xs:extension base="tns:non_life_insurance">
                 <xs:sequence>
-                    <xs:element name="garage" type="xs:boolean"/>
+                    <xs:element name="garage_insurance" type="xs:boolean"/>
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>

@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project id="8fcd607d-1412-4340-ba2e-bb07ead53b24" activeEnvironment="Default" name="ASOS A2" resourceRoot="" soapui-version="5.6.0" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:WsdlInterface" id="278b8729-68c7-4198-a98e-fe39f5ab1a0b" wsaVersion="NONE" name="UserServiceSoapBinding" type="wsdl" bindingName="{user-service}UserServiceSoapBinding" soapVersion="1_1" anonymous="optional" definition="file:/./src/main/resources/wsdl/user-service.wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="file:/./src/main/resources/wsdl/user-service.wsdl"><con:part><con:url>file:/./src/main/resources/wsdl/user-service.wsdl</con:url><con:content><![CDATA[<wsdl:definitions targetNamespace="user-service" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:impl="user-service" xmlns:uns="users">
+  <wsdl:types>
+    <xsd:schema xmlns="http://www.w3.org/2001/XMLSchema">
+      <import namespace="users" schemaLocation="../xsd/user.xsd"/>
+    </xsd:schema>
+  </wsdl:types>
+  <!--GET ALL-->
+  <wsdl:message name="getAllUsersRequest"/>
+  <wsdl:message name="getAllUsersResponse">
+    <wsdl:part name="body" element="uns:users"/>
+  </wsdl:message>
+  <!--GET ONE-->
+  <wsdl:message name="getOneUserRequest">
+    <wsdl:part name="parameter" element="uns:user_id"/>
+  </wsdl:message>
+  <wsdl:message name="getOneUserResponse">
+    <wsdl:part name="body" element="uns:user"/>
+  </wsdl:message>
+  <!--ADD-->
+  <wsdl:message name="addUserRequest">
+    <wsdl:part name="parameter" element="uns:user_without_id"/>
+  </wsdl:message>
+  <wsdl:message name="addUserResponse">
+    <wsdl:part name="body" element="uns:user"/>
+  </wsdl:message>
+  <!--UPDATE-->
+  <wsdl:message name="updateUserRequest">
+    <wsdl:part name="parameter" element="uns:user"/>
+  </wsdl:message>
+  <wsdl:message name="updateUserResponse">
+    <wsdl:part name="body" element="uns:user"/>
+  </wsdl:message>
+  <wsdl:portType name="UserServicePortType">
+    <wsdl:operation name="all">
+      <wsdl:input message="impl:getAllUsersRequest" name="getAllUsersRequest"/>
+      <wsdl:output message="impl:getAllUsersResponse" name="getAllUsersResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="one">
+      <wsdl:input message="impl:getOneUserRequest" name="getOneUserRequest"/>
+      <wsdl:output message="impl:getOneUserResponse" name="getOneUserResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="add">
+      <wsdl:input message="impl:addUserRequest" name="addUserRequest"/>
+      <wsdl:output message="impl:addUserResponse" name="addUserResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="update">
+      <wsdl:input message="impl:updateUserRequest" name="updateUserRequest"/>
+      <wsdl:output message="impl:updateUserResponse" name="updateUserResponse"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="UserServiceSoapBinding" type="impl:UserServicePortType">
+    <wsdlsoap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+    <wsdl:operation name="all">
+      <wsdlsoap:operation soapAction=""/>
+      <wsdl:input name="getAllUsersRequest">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getAllUsersResponse">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="one">
+      <wsdlsoap:operation soapAction=""/>
+      <wsdl:input name="getOneUserRequest">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getOneUserResponse">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="add">
+      <wsdlsoap:operation soapAction=""/>
+      <wsdl:input name="addUserRequest">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="addUserResponse">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="update">
+      <wsdlsoap:operation soapAction=""/>
+      <wsdl:input name="updateUserRequest">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="updateUserResponse">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="UserService">
+    <wsdl:port name="UserService" binding="impl:UserServiceSoapBinding">
+      <wsdlsoap:address location="http://localhost:8080/user"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part><con:part><con:url>file:\.\src\main\resources\xsd\user.xsd</con:url><con:content><![CDATA[<?xml-stylesheet type="text/xsl" href="xs3p.xsl"?>
+<xs:schema elementFormDefault="qualified" targetNamespace="users" version="1.1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="users" xmlns:ans="address">
+  <xs:import namespace="address" schemaLocation="address.xsd"/>
+  <xs:element name="users">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="user" type="tns:user" minOccurs="0" maxOccurs="unbounded"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="user" type="tns:user"/>
+  <xs:element name="user_without_id" type="tns:user_without_id"/>
+  <xs:element name="user_id" type="xs:long"/>
+  <xs:complexType name="user_without_id">
+    <xs:sequence>
+      <xs:element name="surname" type="xs:string" minOccurs="1"/>
+      <xs:element name="lastname" type="xs:string" minOccurs="1"/>
+      <xs:element name="identification_number" type="tns:id_number" minOccurs="1"/>
+      <xs:element name="email" type="tns:email" minOccurs="1"/>
+      <xs:element name="permanent_address" type="ans:address" minOccurs="1"/>
+      <xs:element name="correspondence_address" type="ans:address" minOccurs="0"/>
+      <xs:element name="contracts" type="tns:contract_ids" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="user">
+    <xs:complexContent>
+      <xs:extension base="tns:user_without_id">
+        <xs:sequence>
+          <xs:element name="id" type="xs:long" minOccurs="1" maxOccurs="1"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:simpleType name="id_number">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="[0-9]{6}\/?[0-9]{4}"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="email">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="[^@]+@[^\.]+\..+"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="contract_ids">
+    <xs:sequence>
+      <xs:element name="contract_id" type="xs:long" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>]]></con:content><con:type>http://www.w3.org/2001/XMLSchema</con:type></con:part><con:part><con:url>file:\.\src\main\resources\xsd\address.xsd</con:url><con:content><![CDATA[<?xml-stylesheet type="text/xsl" href="xs3p.xsl"?>
+<xs:schema elementFormDefault="qualified" targetNamespace="address" version="1.1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:complexType name="address">
+    <xs:sequence>
+      <xs:element name="city" type="xs:string" minOccurs="0"/>
+      <xs:element name="zip" type="xs:string" minOccurs="0"/>
+      <xs:element name="street" type="xs:string" minOccurs="0"/>
+      <xs:element name="streetNumber" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>]]></con:content><con:type>http://www.w3.org/2001/XMLSchema</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>http://localhost:8080/user</con:endpoint></con:endpoints><con:operation id="0b35419b-298c-4bd5-992d-5e86611669dd" isOneWay="false" action="" name="add" bindingOperationName="add" type="Request-Response" outputName="addUserResponse" inputName="addUserRequest" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="a7a2fb21-3be6-4a8e-b8fc-dda36afdd536" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/user</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:user="users" xmlns:add="address">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <user:user_without_id>\r
+         <user:surname>Milan</user:surname>\r
+         <user:lastname>Mladoniczky</user:lastname>\r
+         <user:identification_number>0907551043</user:identification_number>\r
+         <user:email>mladoniczky@netgrif.com</user:email>\r
+         <user:permanent_address>\r
+            <!--Optional:-->\r
+            <add:city>Bratislava</add:city>\r
+            <!--Optional:-->\r
+            <add:zip>83106</add:zip>\r
+            <!--Optional:-->\r
+            <add:street>Potočná</add:street>\r
+            <!--Optional:-->\r
+            <add:streetNumber>26/a</add:streetNumber>\r
+         </user:permanent_address>\r
+      </user:user_without_id>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="user-service/UserServicePortType/addUserRequest"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="045ff830-7f53-4252-aeed-6feee61892e5" isOneWay="false" action="" name="all" bindingOperationName="all" type="Request-Response" outputName="getAllUsersResponse" inputName="getAllUsersRequest" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="0ee99c96-c039-47b7-abdd-843814a8dc20" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/user</con:endpoint><con:request>&lt;soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">\r
+   &lt;soapenv:Header/>\r
+   &lt;soapenv:Body/>\r
+&lt;/soapenv:Envelope></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="user-service/UserServicePortType/getAllUsersRequest"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="99dde3be-1642-47d5-8c4e-a556d7d7a6b3" isOneWay="false" action="" name="one" bindingOperationName="one" type="Request-Response" outputName="getOneUserResponse" inputName="getOneUserRequest" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="217eac11-bd16-49d1-b222-8b0b6be6c14e" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/user</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:user="users">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <user:user_id>1</user:user_id>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="user-service/UserServicePortType/getOneUserRequest"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="1220ccd1-2c42-4328-89bb-bcc6f808f03d" isOneWay="false" action="" name="update" bindingOperationName="update" type="Request-Response" outputName="updateUserResponse" inputName="updateUserRequest" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="9796b1b5-c2b0-4e7e-ba3d-7291bb3009a7" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/user</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:user="users" xmlns:add="address">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <user:user>\r
+         <user:surname>?</user:surname>\r
+         <user:lastname>?</user:lastname>\r
+         <user:identification_number>?</user:identification_number>\r
+         <user:email>?</user:email>\r
+         <user:permanent_address>\r
+            <!--Optional:-->\r
+            <add:city>?</add:city>\r
+            <!--Optional:-->\r
+            <add:zip>?</add:zip>\r
+            <!--Optional:-->\r
+            <add:street>?</add:street>\r
+            <!--Optional:-->\r
+            <add:streetNumber>?</add:streetNumber>\r
+         </user:permanent_address>\r
+         <!--Optional:-->\r
+         <user:correspondence_address>\r
+            <!--Optional:-->\r
+            <add:city>?</add:city>\r
+            <!--Optional:-->\r
+            <add:zip>?</add:zip>\r
+            <!--Optional:-->\r
+            <add:street>?</add:street>\r
+            <!--Optional:-->\r
+            <add:streetNumber>?</add:streetNumber>\r
+         </user:correspondence_address>\r
+         <!--Optional:-->\r
+         <user:contracts>\r
+            <!--Zero or more repetitions:-->\r
+            <user:contract_id>?</user:contract_id>\r
+         </user:contracts>\r
+         <user:id>?</user:id>\r
+      </user:user>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="user-service/UserServicePortType/updateUserRequest"/></con:call></con:operation></con:interface><con:properties/><con:wssContainer/><con:oAuth2ProfileContainer/><con:oAuth1ProfileContainer/></con:soapui-project>

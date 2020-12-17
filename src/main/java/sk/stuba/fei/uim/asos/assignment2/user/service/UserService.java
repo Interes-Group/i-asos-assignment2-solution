@@ -1,6 +1,7 @@
 package sk.stuba.fei.uim.asos.assignment2.user.service;
 
 import sk.stuba.fei.uim.asos.assignment2.ws.User;
+import sk.stuba.fei.uim.asos.assignment2.ws.UserWithoutId;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -26,10 +27,18 @@ public class UserService implements IUserService {
      * @return Newly added user
      */
     @Override
-    public User add(User user) {
-        user.setId(this.idCounter.incrementAndGet());
-        users.put(user.getId(), user);
-        return user;
+    public User add(UserWithoutId user) {
+        User newUser = new User();
+        newUser.setId(this.idCounter.incrementAndGet());
+        newUser.setSurname(user.getSurname());
+        newUser.setLastname(user.getLastname());
+        newUser.setEmail(user.getEmail());
+        newUser.setIdentificationNumber(user.getIdentificationNumber());
+        newUser.setPermanentAddress(user.getPermanentAddress());
+        newUser.setCorrespondenceAddress(user.getCorrespondenceAddress());
+        newUser.setContracts(user.getContracts());
+        users.put(newUser.getId(), newUser);
+        return newUser;
     }
 
     /**

@@ -18,23 +18,33 @@
     </xs:element>
 
     <xs:element name="user" type="tns:user"/>
+    <xs:element name="user_without_id" type="tns:user_without_id"/>
 
     <xs:element name="user_id" type="xs:long"/>
 
-    <xs:complexType name="user">
+    <xs:complexType name="user_without_id">
         <xs:sequence>
-            <xs:element name="id" type="xs:long" minOccurs="1" maxOccurs="1"/>
             <xs:element name="surname" type="xs:string" minOccurs="1"/>
             <xs:element name="lastname" type="xs:string" minOccurs="1"/>
-            <xs:element name="identificationNumber" type="tns:idNumber" minOccurs="1"/>
+            <xs:element name="identification_number" type="tns:id_number" minOccurs="1"/>
             <xs:element name="email" type="tns:email" minOccurs="1"/>
-            <xs:element name="permanentAddress" type="ans:address" minOccurs="1"/>
-            <xs:element name="correspondenceAddress" type="ans:address" minOccurs="0"/>
-            <xs:element name="contracts" type="tns:contractIds" minOccurs="0"/>
+            <xs:element name="permanent_address" type="ans:address" minOccurs="1"/>
+            <xs:element name="correspondence_address" type="ans:address" minOccurs="0"/>
+            <xs:element name="contracts" type="tns:contract_ids" minOccurs="0"/>
         </xs:sequence>
     </xs:complexType>
 
-    <xs:simpleType name="idNumber">
+    <xs:complexType name="user">
+       <xs:complexContent>
+           <xs:extension base="tns:user_without_id">
+               <xs:sequence>
+                   <xs:element name="id" type="xs:long" minOccurs="1" maxOccurs="1"/>
+               </xs:sequence>
+           </xs:extension>
+       </xs:complexContent>
+    </xs:complexType>
+
+    <xs:simpleType name="id_number">
         <xs:restriction base="xs:string">
             <xs:pattern value="[0-9]{6}\/?[0-9]{4}"/>
         </xs:restriction>
@@ -44,9 +54,9 @@
             <xs:pattern value="[^@]+@[^\.]+\..+"/>
         </xs:restriction>
     </xs:simpleType>
-    <xs:complexType name="contractIds">
+    <xs:complexType name="contract_ids">
         <xs:sequence>
-            <xs:element name="contractId" type="xs:long" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="contract_id" type="xs:long" minOccurs="0" maxOccurs="unbounded"/>
         </xs:sequence>
     </xs:complexType>
 

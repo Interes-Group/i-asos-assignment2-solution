@@ -1,6 +1,7 @@
 package sk.stuba.fei.uim.asos.assignment2.user.service;
 
 import sk.stuba.fei.uim.asos.assignment2.ws.User;
+import sk.stuba.fei.uim.asos.assignment2.ws.UserWithoutId;
 
 import java.util.List;
 
@@ -9,7 +10,7 @@ import java.util.List;
  */
 public interface IUserService {
 
-    User add(User user);
+    User add(UserWithoutId user);
 
     User update(User user);
 
