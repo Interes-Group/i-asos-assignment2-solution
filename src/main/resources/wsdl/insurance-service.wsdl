@@ -29,6 +29,13 @@
     <wsdl:message name="addInsuranceResponse">
         <wsdl:part name="body" element="ins:insurance"/>
     </wsdl:message>
+    <!--    UPDATE INSURANCE-->
+    <wsdl:message name="updateInsuranceRequest">
+        <wsdl:part name="parameter" element="ins:insurance"/>
+    </wsdl:message>
+    <wsdl:message name="updateInsuranceResponse">
+        <wsdl:part name="body" element="ins:insurance"/>
+    </wsdl:message>
     <!--    GET ALL-->
     <wsdl:message name="getAllInsurancesRequest"/>
     <wsdl:message name="getAllInsurancesResponse">
@@ -48,6 +55,10 @@
             <wsdl:input message="impl:addInsuranceRequest" name="addInsuranceRequest"/>
             <wsdl:output message="impl:addInsuranceResponse" name="addInsuranceResponse"/>
         </wsdl:operation>
+        <wsdl:operation name="update">
+            <wsdl:input message="impl:updateInsuranceRequest" name="updateInsuranceRequest"/>
+            <wsdl:output message="impl:updateInsuranceResponse" name="updateInsuranceResponse"/>
+        </wsdl:operation>
         <wsdl:operation name="all">
             <wsdl:input message="impl:getAllInsurancesRequest" name="getAllInsurancesRequest"/>
             <wsdl:output message="impl:getAllInsurancesResponse" name="getAllInsurancesResponse"/>
@@ -59,13 +70,22 @@
     </wsdl:portType>
 
     <wsdl:binding name="InsuranceServiceSoapBinding" type="impl:InsuranceServicePortType">
-        <wsdlsoap:binding transport="http://schema.xmlsoap.org/soap/http" style="document" />
+        <wsdlsoap:binding transport="http://schema.xmlsoap.org/soap/http" style="document"/>
         <wsdl:operation name="add">
             <wsdlsoap:operation soapAction=""/>
             <wsdl:input name="addInsuranceRequest">
                 <wsdlsoap:body use="literal"/>
             </wsdl:input>
             <wsdl:output name="addInsuranceResponse">
+                <wsdlsoap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="update">
+            <wsdlsoap:operation soapAction=""/>
+            <wsdl:input name="updateInsuranceRequest">
+                <wsdlsoap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="updateInsuranceResponse">
                 <wsdlsoap:body use="literal"/>
             </wsdl:output>
         </wsdl:operation>
